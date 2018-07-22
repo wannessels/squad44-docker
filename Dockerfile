@@ -6,17 +6,16 @@ LABEL maintainer="walentinlamonos@gmail.com"
 
 # Run Steamcmd and install Squad
 RUN ./home/steam/steamcmd/steamcmd.sh +login anonymous \
-        +force_install_dir /home/steam/squad-dedicated \
-        +app_update 403240 validate \
+        +force_install_dir /home/steam/post-scriptum-dedicated \
+        +app_update 844650 validate \
         +quit
 
 ENV PORT=7787 QUERYPORT=27165 RCONPORT=21114 FIXEDMAXPLAYERS=80 RANDOM=NONE
 
-VOLUME /home/steam/squad-dedicated
+VOLUME /home/steam/post-scriptum-dedicated
 
 # Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
-ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/squad-dedicated +app_update 403240 +quit && \
-        ./home/steam/squad-dedicated/SquadServer.sh Port=$PORT QueryPort=$QUERYPORT RCONPORT=$RCONPORT FIXEDMAXPLAYERS=$FIXEDMAXPLAYERS RANDOM=$RANDOM
+ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh PostScriptumServer.sh Port=$PORT QueryPort=$QUERYPORT RCONPORT=$RCONPORT FIXEDMAXPLAYERS=$FIXEDMAXPLAYERS RANDOM=$RANDOM
 
 # Expose ports
 EXPOSE 7787 27165 21114
