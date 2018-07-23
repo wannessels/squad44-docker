@@ -1,8 +1,8 @@
 ############################################################
-# Dockerfile that builds a Squad Gameserver
+# Dockerfile that builds a Post Scriptum Gameserver
 ############################################################
 FROM cm2network/steamcmd
-LABEL maintainer="walentinlamonos@gmail.com"
+LABEL maintainer="avilcreeggan@gmail.com"
 
 # Run Steamcmd and install Squad
 RUN ./home/steam/steamcmd/steamcmd.sh +login anonymous \
