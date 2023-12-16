@@ -1,22 +1,21 @@
 ############################################################
-# Dockerfile that builds a Post Scriptum Gameserver
+# Dockerfile that builds a Squad44 Gameserver
 ############################################################
 FROM cm2network/steamcmd
-LABEL maintainer="avilcreeggan@gmail.com"
 
-# Run Steamcmd and install Squad
+# Run Steamcmd and install Squad44
 RUN ./home/steam/steamcmd/steamcmd.sh +login anonymous \
-        +force_install_dir /home/steam/post-scriptum-dedicated \
-        +app_update 844650 validate \
+        +force_install_dir /home/steam/squad44-dedicated \
+        +app_update 746200 validate \
         +quit
 
 ENV PORT=7787 QUERYPORT=27165 RCONPORT=21114 FIXEDMAXPLAYERS=80 RANDOM=NONE
 
-VOLUME /home/steam/post-scriptum-dedicated
+VOLUME /home/steam/squad44-dedicated
 
 # Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
-ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/post-scriptum-dedicated +app_update 844650 +quit && \
-        ./home/steam/post-scriptum-dedicated/PostScriptumServer.sh Port=$PORT QueryPort=$QUERYPORT RCONPORT=$RCONPORT FIXEDMAXPLAYERS=$FIXEDMAXPLAYERS RANDOM=$RANDOM
+ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/squad44-dedicated +app_update 746200 +quit && \
+        ./home/steam/squad44-dedicated/PostScriptumServer.sh Port=$PORT QueryPort=$QUERYPORT RCONPORT=$RCONPORT FIXEDMAXPLAYERS=$FIXEDMAXPLAYERS RANDOM=$RANDOM
         
 # Expose ports
 EXPOSE 7787 27165 21114
